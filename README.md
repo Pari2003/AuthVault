@@ -10,9 +10,9 @@ A production-grade Identity & Access Management (IAM) microservice built with **
 
 ```mermaid
 graph TD
-    Client[Client Request] -->|OAuth2 / JWT Bearer| API[FastAPI Web Layer]
+    Client[Client Request] -->|OAuth2 or JWT Bearer| API[FastAPI Web Layer]
     API --> AuthGuard[RBAC Dependency Injection]
-    AuthGuard -->|Validates Token & Permissions| Core[Business Logic & Endpoints]
+    AuthGuard -->|Validates Token and Permissions| Core[Business Logic and Endpoints]
     
     subgraph Security Layer
         AuthGuard
