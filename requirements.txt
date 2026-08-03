@@ -11,6 +11,7 @@ python-multipart
 pytest
 pytest-asyncio
 httpx
+locust
 pytest-cov
 greenlet
 cryptography

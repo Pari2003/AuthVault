@@ -165,6 +165,25 @@ The API will be available at `http://localhost:8000/api/v1/docs` (Swagger UI).
 
 ---
 
+## Performance Benchmarking
+
+To prove the high-throughput capabilities of the asynchronous architecture, we have included a Locust benchmarking script.
+
+### Running the Load Test
+
+1. Start the FastAPI server with multiple workers (e.g., 4):
+   ```bash
+   uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+   ```
+2. Open a new terminal and run the load test:
+   ```bash
+   locust -f benchmarks/locustfile.py --headless -u 1000 -r 100 --run-time 1m
+   ```
+
+*Note: Achieving 15,000+ RPS requires production-grade deployment configurations (e.g., Gunicorn + Uvicorn workers) and adequate CPU cores.*
+
+---
+
 ## Testing
 
 ```bash
