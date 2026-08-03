@@ -6,6 +6,30 @@ A production-grade Identity & Access Management (IAM) microservice built with **
 
 ---
 
+## Architecture
+
+```mermaid
+graph TD
+    Client[Client Request] -->|OAuth2 / JWT Bearer| API[FastAPI Web Layer]
+    API --> AuthGuard[RBAC Dependency Injection]
+    AuthGuard -->|Validates Token & Permissions| Core[Business Logic & Endpoints]
+    
+    subgraph Security Layer
+        AuthGuard
+        Crypto[bcrypt Password Hashing]
+    end
+    
+    Core -.-> Crypto
+    Core -.-> Audit[Audit Logging System]
+    
+    Core --> AsyncORM[SQLAlchemy AsyncSession]
+    Audit --> AsyncORM
+    
+    AsyncORM --> Database[(MySQL 8.0)]
+```
+
+---
+
 ## Features
 
 - **JWT Authentication** – Secure token-based auth with configurable expiry and refresh flows.
